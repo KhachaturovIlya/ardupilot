@@ -701,4 +701,5 @@ ArduCopter/mode_flowhold.cpp.48.o: ../../ArduCopter/mode_flowhold.cpp \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
  ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h \
  ../../libraries/AP_Common/missing/utility

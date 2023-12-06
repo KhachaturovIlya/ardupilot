@@ -700,6 +700,6 @@ ArduCopter/Copter.cpp.48.o: ../../ArduCopter/Copter.cpp ap_config.h \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
  ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
- ../../ArduCopter/version.h ap_version.h \
+ ../../ArduCopter/UserVariables.h ../../ArduCopter/version.h ap_version.h \
  ../../libraries/AP_Common/AP_FWVersionDefine.h \
  ../../libraries/AP_Common/AP_FWVersion.h

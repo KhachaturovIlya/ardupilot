@@ -701,5 +701,6 @@ ArduCopter/mode_autorotate.cpp.48.o: ../../ArduCopter/mode_autorotate.cpp \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
  ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h \
  ../../libraries/AC_Autorotation/AC_Autorotation.h \
  ../../libraries/AP_Common/missing/utility

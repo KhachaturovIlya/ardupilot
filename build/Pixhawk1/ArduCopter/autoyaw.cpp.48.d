@@ -699,4 +699,5 @@ ArduCopter/autoyaw.cpp.48.o: ../../ArduCopter/autoyaw.cpp ap_config.h \
  ../../ArduCopter/avoidance_adsb.h \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
- ../../libraries/AC_AttitudeControl/AC_WeatherVane.h
+ ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h

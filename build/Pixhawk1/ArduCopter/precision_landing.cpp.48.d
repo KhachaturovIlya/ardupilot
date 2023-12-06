@@ -700,4 +700,5 @@ ArduCopter/precision_landing.cpp.48.o: \
  ../../ArduCopter/avoidance_adsb.h \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
- ../../libraries/AC_AttitudeControl/AC_WeatherVane.h
+ ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h

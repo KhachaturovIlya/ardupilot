@@ -701,4 +701,5 @@ ArduCopter/RC_Channel.cpp.48.o: ../../ArduCopter/RC_Channel.cpp \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
  ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h \
  ../../libraries/RC_Channel/RC_Channels_VarInfo.h

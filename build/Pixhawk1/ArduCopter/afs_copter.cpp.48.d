@@ -700,4 +700,5 @@ ArduCopter/afs_copter.cpp.48.o: ../../ArduCopter/afs_copter.cpp \
  ../../ArduCopter/avoidance_adsb.h \
  ../../libraries/AP_Avoidance/AP_Avoidance.h \
  ../../ArduCopter/Parameters.h \
- ../../libraries/AC_AttitudeControl/AC_WeatherVane.h
+ ../../libraries/AC_AttitudeControl/AC_WeatherVane.h \
+ ../../ArduCopter/UserVariables.h
