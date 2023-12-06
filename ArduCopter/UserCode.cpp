@@ -3,9 +3,6 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-    pwm = 1500;
-    delta = 1;
-
     const AP_HAL::HAL& hal = AP_HAL::get_HAL();
     hal.console->printf("Starting AP_HAL::RCOutput test\n");
 #if CONFIG_HAL_BOARD == HAL_BOARD_CHIBIOS

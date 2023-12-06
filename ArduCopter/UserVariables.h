@@ -4,16 +4,8 @@
 // variables
 #ifdef USERHOOK_VARIABLES
 
-#if WII_CAMERA == 1
-WiiCamera           ircam;
-int                 WiiRange=0;
-int                 WiiRotation=0;
-int                 WiiDisplacementX=0;
-int                 WiiDisplacementY=0;
-#endif  // WII_CAMERA
-
-static uint16_t pwm;
-static int8_t delta;
+static uint16_t pwm = 1500;
+static int8_t delta = 1;
 
 #endif  // USERHOOK_VARIABLES
 
