@@ -19,17 +19,9 @@ void Copter::userhook_init()
 void Copter::userhook_FastLoop()
 {
     for (uint8_t i=0; i < 14; i++) {
-        hal.rcout->write(i, pwm);
-        pwm += delta;
-        if (delta > 0 && pwm >= 2000) {
-            delta = -1;
-            hal.console->printf("decreasing\n");
-        } else if (delta < 0 && pwm <= 1000) {
-            delta = 1;
-            hal.console->printf("increasing\n");
-        }
+        hal.rcout->write(i, pwm_ex);
+        hal.console->printf("working!\n");
     }
-    hal.scheduler->delay(5);
 }
 #endif
 
