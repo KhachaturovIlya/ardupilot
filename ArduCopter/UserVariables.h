@@ -12,6 +12,9 @@ int                 WiiDisplacementX=0;
 int                 WiiDisplacementY=0;
 #endif  // WII_CAMERA
 
+static uint16_t pwm;
+static int8_t delta;
+
 #endif  // USERHOOK_VARIABLES
 
 
