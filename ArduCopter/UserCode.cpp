@@ -4,12 +4,12 @@
 void Copter::userhook_init()
 {
     hal.console->printf("Starting AP_HAL::RCOutput test\n");
-#if CONFIG_HAL_BOARD == HAL_BOARD_CHIBIOS
-    BoardConfig.init();
-#endif
-    hal.rcout->enable_ch(1);
-    hal.rcout->enable_ch(2);
-    hal.rcout->write(1, pwm_ex);
+    for (uint8_t i = 0; i< 14; i++) {
+        hal.rcout->enable_ch(i);
+    }
+    for (uint8_t i=0; i < 14; i++) {
+        hal.rcout->write(i, pwm_ex);
+    }
 }
 #endif
 
@@ -17,7 +17,6 @@ void Copter::userhook_init()
 void Copter::userhook_FastLoop()
 {
         hal.console->printf("working!\n");
-
 }
 #endif
 
