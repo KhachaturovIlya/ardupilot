@@ -7,20 +7,17 @@ void Copter::userhook_init()
 #if CONFIG_HAL_BOARD == HAL_BOARD_CHIBIOS
     BoardConfig.init();
 #endif
-    for (uint8_t i = 0; i< 14; i++) {
-        hal.rcout->enable_ch(i);
-    }
-
+    hal.rcout->enable_ch(1);
+    hal.rcout->enable_ch(2);
+    hal.rcout->write(1, pwm_ex);
 }
 #endif
 
 #ifdef USERHOOK_FASTLOOP
 void Copter::userhook_FastLoop()
 {
-    for (uint8_t i=0; i < 14; i++) {
-        hal.rcout->write(i, pwm_ex);
         hal.console->printf("working!\n");
-    }
+
 }
 #endif
 
