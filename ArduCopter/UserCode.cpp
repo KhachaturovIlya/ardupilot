@@ -3,14 +3,32 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-    hal.console->printf("Starting AP_HAL::RCOutput test\n");
-    for (uint8_t i = 0; i< 14; i++) {
-        hal.rcout->enable_ch(i);
-    }
-    for (uint8_t i=0; i < 14; i++) {
-        hal.rcout->write(i, pwm_ex);
-    }
+    SRV_Channels srvs;
+    AP_BattMonitor _battmonitor{0, nullptr, nullptr};
+
+    AP_Motors *motors;
+    AP_MotorsMatrix *motors_matrix;
+
+    bool thrust_boost = false;
+
+    uint8_t num_outputs;
+    // default to quad frame class, frame class can be changed by argument in parser below
+    AP_Motors::motor_frame_class frame_class = AP_Motors::MOTOR_FRAME_QUAD;
+
+    motors_matrix = new AP_MotorsMatrix(400);
+    motors = motors_matrix;
+    
+    motors->init(frame_class, AP_Motors::MOTOR_FRAME_TYPE_X);
+    num_outputs = 4;
+
+    motors->set_dt(1.0/400.0);
+    motors->set_update_rate(490);
+    motors->output_min();
+    for(int i = 0; i < 5; ++i)
+    {motors->output_test_seq(i, 1500);}
+
 }
+
 #endif
 
 #ifdef USERHOOK_FASTLOOP
