@@ -256,19 +256,106 @@ void setup()
 // loop
 void loop()
 {
-    motors->armed(true);
-    for (int8_t i=1; i <= num_outputs; i++) {
-        hal.console->printf("Motor %d\n",(int)i);
-        motors->output_test_seq(i, 1500);
-        hal.scheduler->delay(300);
-        motors->output_test_seq(i, 1000);
-        hal.scheduler->delay(2000);
+    int16_t value;
+
+    // display help
+    hal.console->printf("Press 't' to run motor orders test, 's' to run stability patch test.  Be careful the motors will spin!\n");
+
+    // wait for user to enter something
+    while( !hal.console->available() ) {
+        hal.scheduler->delay(20);
     }
-    motors->armed(false);
+
+    // get character from user
+    value = hal.console->read();
+
+    // test motors
+    if (value == 't' || value == 'T') {
+        motor_order_test();
+        hal.console->printf("finished test.\n");
+    }
+    if (value == 's' || value == 'S') {
+        stability_test();
+        hal.console->printf("finished test.\n");
+    }
 }
 
-AP_HAL_MAIN();
+// print motor layout for all frame types in json format
+void print_all_motor_matrix()
+{
+    hal.console->printf("{\n");
+    hal.console->printf("\t\"Version\": \"%s\",\n", VERSION);
+    hal.console->printf("\t\"layouts\": [\n");
 
+    bool first_layout = true;
+    char frame_and_type_string[30];
+
+    for (uint8_t frame_class=0; frame_class <= AP_Motors::MOTOR_FRAME_DECA; frame_class++) {
+        for (uint8_t frame_type=0; frame_type < AP_Motors::MOTOR_FRAME_TYPE_Y4; frame_type++) {
+            if (frame_type == AP_Motors::MOTOR_FRAME_TYPE_VTAIL ||
+                frame_type == AP_Motors::MOTOR_FRAME_TYPE_ATAIL) {
+                // Skip the none planar motors types
+                continue;
+            }
+            motors_matrix->init((AP_Motors::motor_frame_class)frame_class, (AP_Motors::motor_frame_type)frame_type);
+            if (motors_matrix->initialised_ok()) {
+                if (!first_layout) {
+                    hal.console->printf(",\n");
+                }
+                first_layout = false;
+
+                // Grab full frame string and strip "Frame: " and split
+                // This is the long way round, motors does have direct getters, but there protected
+                motors_matrix->get_frame_and_type_string(frame_and_type_string, ARRAY_SIZE(frame_and_type_string));
+                char *frame_string = strchr(frame_and_type_string, ':');
+                char *type_string = strchr(frame_and_type_string, '/');
+                if (type_string != nullptr) {
+                    *type_string = 0;
+                }
+
+                hal.console->printf("\t\t{\n");
+                hal.console->printf("\t\t\t\"Class\": %i,\n", frame_class);
+                hal.console->printf("\t\t\t\"ClassName\": \"%s\",\n", frame_string+2);
+                hal.console->printf("\t\t\t\"Type\": %i,\n", frame_type);
+                hal.console->printf("\t\t\t\"TypeName\": \"%s\",\n", (type_string != nullptr) ? type_string + 1 : "?");
+                hal.console->printf("\t\t\t\"motors\": [\n");
+                bool first_motor = true;
+                for (uint8_t i = 0; i < AP_MOTORS_MAX_NUM_MOTORS; i++) {
+                    float roll, pitch, yaw, throttle;
+                    uint8_t testing_order;
+                    if (motors_matrix->get_factors(i, roll, pitch, yaw, throttle, testing_order)) {
+                        if (!first_motor) {
+                            hal.console->printf(",\n");
+                        }
+                        first_motor = false;
+                        hal.console->printf("\t\t\t\t{\n");
+                        hal.console->printf("\t\t\t\t\t\"Number\": %i,\n", i+1);
+                        hal.console->printf("\t\t\t\t\t\"TestOrder\": %i,\n", testing_order);
+                        hal.console->printf("\t\t\t\t\t\"Rotation\": ");
+                        if (is_positive(yaw)) {
+                            hal.console->printf("\"CCW\",\n");
+                        } else if (is_negative(yaw)) {
+                            hal.console->printf("\"CW\",\n");
+                        } else {
+                            hal.console->printf("\"?\",\n");
+                        }
+                        hal.console->printf("\t\t\t\t\t\"Roll\": %0.4f,\n", roll);
+                        hal.console->printf("\t\t\t\t\t\"Pitch\": %0.4f\n", pitch);
+                        hal.console->printf("\t\t\t\t}");
+                    }
+                }
+                hal.console->printf("\n");
+                hal.console->printf("\t\t\t]\n");
+                hal.console->printf("\t\t}");
+
+            }
+        }
+    }
+
+    hal.console->printf("\n");
+    hal.console->printf("\t]\n");
+    hal.console->printf("}\n");
+}
 
 // stability_test
 void motor_order_test()
