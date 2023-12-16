@@ -7,7 +7,7 @@ void Copter::userhook_init()
     motors->set_dt(1.0/400.0);
     motors->set_update_rate(490);
     motors->output_min();
-    for(int i = 0; i < 5; ++i)
+    for(int i = 1; i < 6; ++i)
     {motors->output_test_seq(i, 1500);}
 
 }
