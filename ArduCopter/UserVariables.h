@@ -4,7 +4,7 @@
 // variables
 #ifdef USERHOOK_VARIABLES
 
-const uint16_t pwm_ex = 2000;
+const uint16_t pwm_ex = 1400;
 
 #endif  // USERHOOK_VARIABLES
 
