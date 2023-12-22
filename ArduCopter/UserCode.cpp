@@ -3,11 +3,13 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
+    motors->is_motor_enabled(5);
+    motors->is_motor_enabled(6);
     motors->armed(true);
     motors->set_dt(1.0/400.0);
     motors->set_update_rate(490);
     motors->output_min();
-
+    
 
 }
 
@@ -37,11 +39,9 @@ void Copter::userhook_MediumLoop()
 #ifdef USERHOOK_SLOWLOOP
 void Copter::userhook_SlowLoop()
 {
-    uint16_t k = 1000;
     for(int i = 1; i < 6; ++i)
-    {if(k <= 1800)
-    {k += 10;
-    motors->output_test_seq(i, k);}
+    {
+    motors->output_test_seq(i, pwm_ex);}
     }
 
 }
@@ -50,8 +50,6 @@ void Copter::userhook_SlowLoop()
 #ifdef USERHOOK_SUPERSLOWLOOP
 void Copter::userhook_SuperSlowLoop()
 {
-    for(int i = 1; i < 6; ++i)
-    {motors->output_test_seq(i, 1500);}
 }
 #endif
 
