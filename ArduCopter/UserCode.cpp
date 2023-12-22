@@ -42,7 +42,6 @@ void Copter::userhook_SlowLoop()
     for(int i = 1; i < 6; ++i)
     {
     motors->output_test_seq(i, pwm_ex);}
-    }
 
 }
 #endif
