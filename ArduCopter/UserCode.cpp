@@ -3,11 +3,7 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-if (motoro_numero >= 4 && motoro_numero < AP_MOTORS_MAX_NUM_MOTORS) {
-    SRV_Channel::Aux_servo_function_t function = SRV_Channels::get_motor_function(motoro_numero);
-    SRV_Channels::set_aux_channel_default(function, motoro_numero);
-    }
-
+    motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
     motors->is_motor_enabled(5);
     motors->armed(true);
     motors->set_dt(1.0/400.0);
