@@ -980,6 +980,9 @@ private:
 #if MODE_AUTO_ENABLED == ENABLED
     ModeAuto mode_auto;
 #endif
+#if MODE_WATER_ENABLED == ENABLED
+    ModeWater mode_water;
+#endif
 #if AUTOTUNE_ENABLED == ENABLED
     ModeAutoTune mode_autotune;
 #endif

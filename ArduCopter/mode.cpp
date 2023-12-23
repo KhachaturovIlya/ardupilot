@@ -179,6 +179,12 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             break;
 #endif
 
+#if MODE_WATER_ENABLED == ENABLED
+        case Mode::Number::WATER:
+            ret = &mode_water;
+            break;
+#endif
+
         default:
             break;
     }
