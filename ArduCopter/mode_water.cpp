@@ -19,7 +19,7 @@ void ModeWater::run()
     motors->set_update_rate(490);
     motors->output_min();
 
-    for(int i = 1; i < 6; ++i)
+    for(int i = 5; i <= 6; ++i)
     {
     motors->rc_write(i, pwm_wat);}
 
