@@ -3,21 +3,14 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-    motors->armed(true);
-    motors->set_dt(1.0/400.0);
-    motors->set_update_rate(490);
-    motors->output_min();
 
-    for(int i = 1; i < 4; ++i)
-    {
-    motors->rc_write(i, pwm_ex);}
 }
 #endif
 
 #ifdef USERHOOK_FASTLOOP
 void Copter::userhook_FastLoop()
 {
-        hal.console->printf("working!\n");
+    
 }
 #endif
 
