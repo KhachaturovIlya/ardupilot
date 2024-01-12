@@ -95,7 +95,7 @@ public:
         AUTOROTATE =   26,  // Autonomous autorotation
         AUTO_RTL =     27,  // Auto RTL, this is not a true mode, AUTO will report as this mode if entered to perform a DO_LAND_START Landing sequence
         TURTLE =       28,  // Flip over after crash
-        WATER =        29,  // Запуск маршеввых движков.
+        WATER_MODE =   29,  // Запуск маршеввых движков.
 
         // Mode number 127 reserved for the "drone show mode" in the Skybrush
         // fork at https://github.com/skybrush-io/ardupilot
@@ -1967,7 +1967,7 @@ class ModeWater : public Mode {
 public:
     // inherit constructor
     using Mode::Mode;
-    Number mode_number() const override { return Number::WATER; }
+    Number mode_number() const override { return Number::WATER_MODE; }
     bool init(bool ignore_checks) override;
 
     virtual void run() override;
@@ -1977,7 +1977,7 @@ public:
 
 protected:
 
-    const char *name() const override { return "ModeWater"; }
-    const char *name4() const override { return "ModeW"; }
+    const char *name() const override { return "MODEWATER"; }
+    const char *name4() const override { return "WATR"; }
 private:
 };

@@ -180,7 +180,7 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 #endif
 
 #if MODE_WATER_ENABLED == ENABLED
-        case Mode::Number::WATER:
+        case Mode::Number::WATER_MODE:
             ret = &mode_water;
             break;
 #endif
