@@ -14,6 +14,7 @@ void ModeWater::run()
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
     motors->is_motor_enabled(5);
+    motors->is_motor_enabled(6);
     motors->armed(true);
     motors->set_dt(1.0/400.0);
     motors->set_update_rate(490);

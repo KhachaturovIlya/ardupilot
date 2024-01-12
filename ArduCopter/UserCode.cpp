@@ -3,7 +3,10 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-
+    motors->init(AP_Motors::MOTOR_FRAME_QUAD, AP_Motors::MOTOR_FRAME_TYPE_X);
+    motors->set_dt(1.0/400.0);
+    motors->set_update_rate(490);
+    motors->output_min();
 }
 #endif
 
