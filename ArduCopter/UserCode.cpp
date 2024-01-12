@@ -3,10 +3,19 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-    motors->init(AP_Motors::MOTOR_FRAME_QUAD, AP_Motors::MOTOR_FRAME_TYPE_X);
-    motors->set_dt(1.0/400.0);
-    motors->set_update_rate(490);
-    motors->output_min();
+        uint16_t pwm_wat = 1400;
+
+        motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
+        motors->is_motor_enabled(5);
+        motors->is_motor_enabled(6);
+        motors->armed(true);
+        motors->set_dt(1.0/400.0);
+        motors->set_update_rate(490);
+        motors->output_min();
+
+        for(int i = 5; i <= 6; ++i)
+        {
+        motors->rc_write(i, pwm_wat);}
 }
 #endif
 
@@ -32,27 +41,15 @@ void Copter::userhook_MediumLoop()
 #endif
 
 #ifdef USERHOOK_SLOWLOOP
-void Copter::userhook_SlowLoop()
-{
-    chel += 1;
+///void Copter::userhook_SlowLoop()
+///{
+///    chel += 1;
 
-    if(chel == 100)
-    {
-        uint16_t pwm_wat = 1400;
+///    if(chel == 100)
+///    {
 
-        motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
-        motors->is_motor_enabled(5);
-        motors->is_motor_enabled(6);
-        motors->armed(true);
-        motors->set_dt(1.0/400.0);
-        motors->set_update_rate(490);
-        motors->output_min();
-
-        for(int i = 5; i <= 6; ++i)
-        {
-        motors->rc_write(i, pwm_wat);}
-    }
-}
+///    }
+///}
 #endif
 
 #ifdef USERHOOK_SUPERSLOWLOOP
