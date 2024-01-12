@@ -6,10 +6,6 @@ bool ModeWater::init(bool ignore_checks)
         return false;
     }
     return true;
-}
-
-void ModeWater::run()
-{
     uint16_t pwm_wat = 1400;
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
@@ -23,5 +19,10 @@ void ModeWater::run()
     for(int i = 5; i <= 6; ++i)
     {
     motors->rc_write(i, pwm_wat);}
+}
+
+void ModeWater::run()
+{
+
 
 }
