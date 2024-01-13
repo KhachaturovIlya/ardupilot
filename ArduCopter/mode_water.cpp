@@ -2,9 +2,6 @@
 
 bool ModeWater::init(bool ignore_checks)
 {
-    if (motors->armed()) {
-        return false;
-    }
     return true;
 
 }
