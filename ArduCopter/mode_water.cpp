@@ -8,7 +8,7 @@ bool ModeWater::init(bool ignore_checks)
 
 void ModeWater::run()
 {
-    static uint16_t pwm_wat = 1400;
+    static uint16_t pwm_wat = 1600;
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
     motors->is_motor_enabled(5);
@@ -18,7 +18,6 @@ void ModeWater::run()
     motors->set_update_rate(490);
     motors->output_min();
 
-    for(int i = 5; i <= 6; ++i)
-    {
-    motors->rc_write(i, pwm_wat);}
+    attitude_control->set_throttle_out(1.0f, true, g.throttle_filt);
+
 }
