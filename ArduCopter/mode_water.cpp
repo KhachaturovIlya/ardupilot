@@ -8,7 +8,8 @@ bool ModeWater::init(bool ignore_checks)
 
 void ModeWater::run()
 {
-    static uint16_t pwm_wat = 1600;
+    ///    static uint16_t pwm_wat = 1600;
+
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
     motors->is_motor_enabled(5);
