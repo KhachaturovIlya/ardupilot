@@ -12,6 +12,8 @@ void ModeWater::run()
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
 
+    motors->armed(true);
+
     for (uint8_t i = 5; i <= 6; ++i) {
         if (!motors->is_motor_enabled(i)) {
             continue;
