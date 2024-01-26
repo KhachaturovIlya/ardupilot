@@ -22,3 +22,5 @@
     for(int i = 5; i <= 6; ++i)
     {
     motors->rc_write(i, pwm_wat);}
+
+    дТыдыщ!
