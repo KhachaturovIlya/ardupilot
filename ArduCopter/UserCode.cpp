@@ -44,16 +44,37 @@ void Copter::userhook_SuperSlowLoop()
 #ifdef USERHOOK_AUXSWITCH
 void Copter::userhook_auxSwitch1(const RC_Channel::AuxSwitchPos ch_flag)
 {
-    // put your aux switch #1 handler here (CHx_OPT = 47)
+    motors->armed(true);
+        motors->set_dt(1.0/400.0);
+        motors->set_update_rate(490);
+        motors->output_min();
+
+        for(int i = 1; i < 6; ++i)
+        {
+        motors->rc_write(i, pwm_ex);}
 }
 
 void Copter::userhook_auxSwitch2(const RC_Channel::AuxSwitchPos ch_flag)
 {
-    // put your aux switch #2 handler here (CHx_OPT = 48)
+    motors->armed(true);
+        motors->set_dt(1.0/400.0);
+        motors->set_update_rate(490);
+        motors->output_min();
+
+        for(int i = 1; i < 6; ++i)
+        {
+        motors->rc_write(i, pwm_ex);}    // put your aux switch #2 handler here (CHx_OPT = 48)
 }
 
 void Copter::userhook_auxSwitch3(const RC_Channel::AuxSwitchPos ch_flag)
 {
-    // put your aux switch #3 handler here (CHx_OPT = 49)
+    motors->armed(true);
+        motors->set_dt(1.0/400.0);
+        motors->set_update_rate(490);
+        motors->output_min();
+
+        for(int i = 1; i < 6; ++i)
+        {
+        motors->rc_write(i, pwm_ex);}    // put your aux switch #3 handler here (CHx_OPT = 49)
 }
 #endif
