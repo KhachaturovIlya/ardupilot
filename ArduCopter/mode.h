@@ -1975,7 +1975,7 @@ public:
     bool allows_arming(AP_Arming::Method method) const override { return true; }
     
     /// Вроде то что ниже, разрешает запуск движков функции
-    void output_to_motors() override; /// {} 
+    void output_to_motors() override{};
     
     bool init(bool ignore_checks) override;
 
