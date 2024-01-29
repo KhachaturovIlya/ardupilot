@@ -3,7 +3,7 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-
+    copter.set_auto_armed(true);
 }
 #endif
 

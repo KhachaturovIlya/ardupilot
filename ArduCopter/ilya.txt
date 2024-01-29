@@ -23,4 +23,66 @@
     {
     motors->rc_write(i, pwm_wat);}
 
-    дТыдыщ!
+Возможная функция для запуска моторов: 
+
+// output pilot's throttle
+    float pilot_desired_throttle = get_pilot_desired_throttle();
+    attitude_control->set_throttle_out(pilot_desired_throttle, true, g.throttle_filt);
+
+Adding new motors:
+    SRV_Channel::Aux_servo_function_t function = SRV_Channels::get_motor_function(i);
+    SRV_Channels::set_aux_channel_default(function, i);
+
+Запуск моторов: 
+/*
+  write to an output channel
+ */
+void AP_Motors::rc_write(uint8_t chan, uint16_t pwm)
+{
+    SRV_Channel::Aux_servo_function_t function = SRV_Channels::get_motor_function(chan);
+    if ((1U<<chan) & _motor_pwm_range_mask) {
+        // note that PWM_MIN/MAX has been forced to 1000/2000
+        SRV_Channels::set_output_scaled(function, pwm - 1000);
+    } else {
+        SRV_Channels::set_output_pwm(function, pwm);
+    }
+}
+
+/*
+  set radio_out for all channels matching the given function type
+ */
+void SRV_Channels::set_output_pwm(SRV_Channel::Aux_servo_function_t function, uint16_t value)
+{
+    if (!function_assigned(function)) {
+        return;
+    }
+    for (uint8_t i = 0; i < NUM_SERVO_CHANNELS; i++) {
+        if (channels[i].function == function) {
+            channels[i].set_output_pwm(value);
+            channels[i].output_ch();
+        }
+    }
+}
+
+
+void ModeTurtle::change_motor_direction(bool reverse)
+{
+    AP_HAL::RCOutput::BLHeliDshotCommand direction = reverse ? AP_HAL::RCOutput::DSHOT_REVERSE : AP_HAL::RCOutput::DSHOT_NORMAL;
+    AP_HAL::RCOutput::BLHeliDshotCommand inverse_direction = reverse ? AP_HAL::RCOutput::DSHOT_NORMAL : AP_HAL::RCOutput::DSHOT_REVERSE;
+
+    if (!hal.rcout->get_reversed_mask()) {
+        hal.rcout->send_dshot_command(direction, AP_HAL::RCOutput::ALL_CHANNELS, 0, 10, true);
+    } else {
+        for (uint8_t i = 0; i < AP_MOTORS_MAX_NUM_MOTORS; ++i) {
+            if (!motors->is_motor_enabled(i)) {
+                continue;
+            }
+
+            if ((hal.rcout->get_reversed_mask() & (1U << i)) == 0) {
+                hal.rcout->send_dshot_command(direction, i, 0, 10, true);
+            } else {
+                hal.rcout->send_dshot_command(inverse_direction, i, 0, 10, true);
+            }
+        }
+    }
+}
