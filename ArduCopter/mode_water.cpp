@@ -35,6 +35,8 @@ void ModeWater::run()
 
 void ModeWater::exit()
 {
-    motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::SHUT_DOWN);
+    motors->armed(false);
+    ///motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::SHUT_DOWN);
     motors->init(AP_Motors::MOTOR_FRAME_QUAD, AP_Motors::MOTOR_FRAME_TYPE_X);
+    for(int i = 5; i <= 6; ++i){motors->is_motor_enabled(i);}
 }
