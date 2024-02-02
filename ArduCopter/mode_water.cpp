@@ -2,12 +2,12 @@
 
 bool ModeWater::init(bool ignore_checks)
 {
-    if (motors->armed()) {return false;}
     return true;
 }
 
 void ModeWater::run()
 {
+    if (motors->armed()) {motors->armed(false);}
     hal.console->begin(115200);
     hal.console->printf("\n\nMotors expo inverse test\n\n");
     static uint16_t pwm_wat = 1600;
@@ -31,4 +31,10 @@ void ModeWater::run()
         motors->rc_write(i, pwm_wat);
     }
 
+}
+
+void ModeWater::exit()
+{
+    motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::SHUT_DOWN);
+    motors->init(AP_Motors::MOTOR_FRAME_QUAD, AP_Motors::MOTOR_FRAME_TYPE_X);
 }

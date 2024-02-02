@@ -1973,6 +1973,7 @@ public:
     bool requires_GPS() const override { return false; }
     bool has_manual_throttle() const override { return true; }
     bool allows_arming(AP_Arming::Method method) const override { return true; }
+    void exit() override;
     
     /// Вроде то что ниже, разрешает запуск движков функции
     void output_to_motors() override{};
