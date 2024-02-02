@@ -7,14 +7,17 @@ bool ModeWater::init(bool ignore_checks)
 
 void ModeWater::run()
 {
-    if (motors->armed()) {motors->armed(false);}
+    if (motors->armed()) {
+        motors->armed(false);
+        motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::THROTTLE_UNLIMITED);
+    }
     hal.console->begin(115200);
-    hal.console->printf("\n\nMotors expo inverse test\n\n");
-    static uint16_t pwm_wat = 1600;
+    hal.console->printf("\n\nWater Mode working\n\n");
+    static uint16_t pwm_wat = 1400;
 
     motors->init(AP_Motors::MOTOR_FRAME_HEXA, AP_Motors::MOTOR_FRAME_TYPE_X);
 
-    ///motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::THROTTLE_UNLIMITED);
+    motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::THROTTLE_UNLIMITED);
     motors->set_dt(1.0/400.0);
     motors->set_update_rate(490);
     motors->output_min();

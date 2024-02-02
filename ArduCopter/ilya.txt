@@ -64,7 +64,7 @@ void SRV_Channels::set_output_pwm(SRV_Channel::Aux_servo_function_t function, ui
     }
 }
 
-
+///Reverse the motors (see ModeTurtle)
 void ModeTurtle::change_motor_direction(bool reverse)
 {
     AP_HAL::RCOutput::BLHeliDshotCommand direction = reverse ? AP_HAL::RCOutput::DSHOT_REVERSE : AP_HAL::RCOutput::DSHOT_NORMAL;
