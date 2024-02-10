@@ -4,24 +4,7 @@
 void Copter::userhook_init()
 {
     ///copter.set_auto_armed(true);
-    AP_HAL::RCOutput::BLHeliDshotCommand direction = true ? AP_HAL::RCOutput::DSHOT_REVERSE : AP_HAL::RCOutput::DSHOT_NORMAL;
-    AP_HAL::RCOutput::BLHeliDshotCommand inverse_direction = true ? AP_HAL::RCOutput::DSHOT_NORMAL : AP_HAL::RCOutput::DSHOT_REVERSE;
-
-    if (!hal.rcout->get_reversed_mask()) {
-        hal.rcout->send_dshot_command(direction, AP_HAL::RCOutput::ALL_CHANNELS, 0, 10, true);
-    } else {
-        for (uint8_t i = 0; i < AP_MOTORS_MAX_NUM_MOTORS; ++i) {
-            if (!motors->is_motor_enabled(i)) {
-                continue;
-            }
-
-            if ((hal.rcout->get_reversed_mask() & (1U << i)) == 0) {
-                hal.rcout->send_dshot_command(direction, i, 0, 10, true);
-            } else {
-                hal.rcout->send_dshot_command(inverse_direction, i, 0, 10, true);
-            }
-        }
-    }
+    motors->rc_write(1, 1200);
 }
 #endif
 
