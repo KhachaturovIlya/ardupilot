@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/ardupilot/ArduCopter",
-      "program": "d:/ardupilot/ArduCopter/build/Debug/outDebug",
+      "cwd": "d:/ardupilot/libraries/AP_Motors",
+      "program": "d:/ardupilot/libraries/AP_Motors/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

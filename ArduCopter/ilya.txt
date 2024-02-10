@@ -86,3 +86,5 @@ void ModeTurtle::change_motor_direction(bool reverse)
         }
     }
 }
+
+AP_BUTTON
