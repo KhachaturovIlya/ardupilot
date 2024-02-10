@@ -3,9 +3,10 @@
 #ifdef USERHOOK_INIT
 void Copter::userhook_init()
 {
-    ///copter.set_auto_armed(true);
+    copter.set_auto_armed(true);
+    
     motors->armed(true);
-    motors->rc_write(1, 1200);
+    for(int i=0; i<4; ++i){motors->rc_write(1, 1200);}
 }
 #endif
 
