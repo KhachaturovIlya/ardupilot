@@ -24,8 +24,8 @@ void Copter::userhook_init()
         }
     }
 
-    motors->armed(true);
-    for(int i=0; i<4; ++i){motors->rc_write(1, 1200);}
+    ///motors->armed(true);
+    ///for(int i=0; i<4; ++i){motors->rc_write(1, 1200);}
 }
 #endif
 
