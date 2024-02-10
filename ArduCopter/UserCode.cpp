@@ -4,6 +4,7 @@
 void Copter::userhook_init()
 {
     ///copter.set_auto_armed(true);
+    motors->armed(true);
     motors->rc_write(1, 1200);
 }
 #endif
